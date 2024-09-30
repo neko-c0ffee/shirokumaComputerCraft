@@ -14,7 +14,7 @@ while true do
   if isFishingSuccess then
     local isDropSuccess, dropMessage = turtle.dropUp()
     if not isDropSuccess then
-      print('drop failed : '. dropMessage)
+      print('drop failed : ', dropMessage)
       break
     end
   end
