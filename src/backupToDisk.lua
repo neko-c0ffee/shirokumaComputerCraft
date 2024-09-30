@@ -6,3 +6,5 @@ for key, fileName in pairs(fileList) do
     fs.copy(fileName, destination)
   end
 end
+
+print('succeed')
