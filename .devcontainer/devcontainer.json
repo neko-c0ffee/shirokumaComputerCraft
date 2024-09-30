@@ -1,0 +1,32 @@
+{
+	// コンテナ名
+	"name": "shirokumaComputerCraft",
+
+	// コンテナのビルドに関する設定
+	"build": {
+		// 使用するDockerfileのパス
+		"dockerfile": "Dockerfile",
+		// Dockerのビルドコンテキストとして使用するディレクトリ
+		"context": "../"
+	},
+
+	"runArgs": [
+		"-it"
+	],
+
+	"customizations": {
+		"vscode": {
+			"settings": {
+				"editor.tabSize": 2
+			},
+			"extensions": [
+				"sumneko.lua",
+				"LorettaDevs.loretta-lua",
+				"jackmacwindows.vscode-computercraft",
+				"rog2.luacheck",
+				"yzhang.markdown-all-in-one",
+				"shd101wyy.markdown-preview-enhanced"
+			]
+		}
+	}
+}
