@@ -6,6 +6,7 @@ if userName == nil then
   print('github userName is required')
   print('if repositoryName is omitted, assume "shirokumaComputerCraft"')
   print('if branchName is omitted, assume "main"')
+  return
 end
 
 if repositoryName == nil then
