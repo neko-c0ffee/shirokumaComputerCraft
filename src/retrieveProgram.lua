@@ -1,4 +1,20 @@
-local baseUrl = 'https://raw.githubusercontent.com/neko-c0ffee/shirokumaComputerCraft/refs/heads/main/src/'
+local baseUrlFormat = 'https://raw.githubusercontent.com/%s/%s/refs/heads/%s/src/'
+
+local userName, repositoryName, branchName = ...
+if userName == nil then
+  print('usage : retrieveProgram [github userName] [repositoryName] [branchName]')
+  print('github userName is required')
+  print('if repositoryName is omitted, assume "shirokumaComputerCraft"')
+  print('if branchName is omitted, assume "main"')
+end
+
+if repositoryName == nil then
+  repositoryName = 'shirokumaComputerCraft'
+end
+if branchName == nil then
+  branchName = 'main'
+end
+local baseUrl = string.format(baseUrlFormat, userName, repositoryName, branchName)
 
 print('Enter the name of the program you want to retrieve')
 local pathForRetrieve = read()
@@ -13,7 +29,8 @@ local okInput = read()
 print()
 
 if okInput == 'y' then
-  local inputFile = http.get(baseUrl..pathForRetrieve)
+  local url = baseUrl..pathForRetrieve
+  local inputFile = http.get(url)
   if inputFile ~= nil then
     local outputFile = fs.open(pathForSave, 'w')
     outputFile.write(inputFile.readAll())
@@ -22,6 +39,6 @@ if okInput == 'y' then
     inputFile.close()
     print('succeed')
   else
-    print('retrieve failed')
+    print('retrieve failed. url : ', url)
   end
 end
