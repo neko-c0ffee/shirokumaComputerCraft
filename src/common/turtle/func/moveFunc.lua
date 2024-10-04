@@ -15,7 +15,7 @@ local function moveStraight(direction, distance)
 	local absDistance = math.abs(distance);
 	local isSuccess
 	local errMessage
-	for i = 1, absDistance + 1, 1 do
+	for i = 1, absDistance, 1 do
 		if direction == 'forward' or direction == 'right' then
 			if distance > 0 then
 				isSuccess, errMessage = turtle.forward()
