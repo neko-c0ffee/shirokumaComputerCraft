@@ -22,7 +22,7 @@ local function moveStraight(direction, distance)
 			else
 				isSuccess, errMessage = turtle.back()
 			end
-		else if direction == 'up' then
+		elseif direction == 'up' then
 			if distance > 0 then
 				isSuccess, errMessage = turtle.up()
 			else
