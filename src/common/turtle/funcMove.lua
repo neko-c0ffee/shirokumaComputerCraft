@@ -1,4 +1,4 @@
--- to load: dofile(shell.dir()..'/moveFunc')
+-- to load: dofile(shell.resolveProgram('funcMove'))
 -- usage: move([forward-distance], [up-distance], [right-distance])
 -- if there are blocks or entities between the turtle and the destination, the turtle returns.
 
