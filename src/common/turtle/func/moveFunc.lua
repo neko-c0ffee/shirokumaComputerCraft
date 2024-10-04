@@ -65,7 +65,7 @@ function move(forwardDistance, upDistance, rightDistance)
 	if not isSuccess then
 		moveStraight('right', -resultDistance)
 		moveStraight('up', -upDistance)
-		moveStraight('forward', forwardDistance)
+		moveStraight('forward', -forwardDistance)
 		return false
 	end
 
