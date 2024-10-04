@@ -34,6 +34,7 @@ local function placeBlock()
 			if itemDetail ~= nil and itemDetail.name == blockForFill then
 				turtle.select(i)
 				isExists = true
+				break
 			end
 		end
 		if not isExists then
