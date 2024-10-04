@@ -62,6 +62,7 @@ local isRight = rightOrLeft == 'right'
 local isSuccess = true
 for i = 1, height, 1 do
 	isSuccess = fillLine(isRight and width or -width)
+	isRight = not isRight
 	if not isSuccess then
 		break
 	end
