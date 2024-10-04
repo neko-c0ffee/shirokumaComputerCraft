@@ -1,6 +1,5 @@
 -- to load: dofile(shell.resolveProgram('funcMove'))
--- usage: move([forward-distance], [up-distance], [right-distance])
--- if there are blocks or entities between the turtle and the destination, the turtle returns.
+-- usage: move([forward-distance], [up-distance], [right-distance], [isReturnWhenError (true|false)])
 
 local function moveStraight(direction, distance)
 	if distance == 0 then
@@ -47,25 +46,31 @@ local function moveStraight(direction, distance)
 	return isSuccess, resultDistance
 end
 
-function move(forwardDistance, upDistance, rightDistance)
+function move(forwardDistance, upDistance, rightDistance, isReturnWhenError)
 	local isSuccess
 	local resultDistance
 	isSuccess, resultDistance = moveStraight('forward', forwardDistance)
 	if not isSuccess then
-		moveStraight('forward', -resultDistance)
+		if isReturnWhenError then
+			moveStraight('forward', -resultDistance)
+		end
 		return false
 	end
 	isSuccess, resultDistance = moveStraight('up', upDistance)
 	if not isSuccess then
-		moveStraight('up', -resultDistance)
-		moveStraight('forward', -forwardDistance)
+		if isReturnWhenError then
+			moveStraight('up', -resultDistance)
+			moveStraight('forward', -forwardDistance)
+		end
 		return false
 	end
 	isSuccess, resultDistance = moveStraight('right', rightDistance)
 	if not isSuccess then
-		moveStraight('right', -resultDistance)
-		moveStraight('up', -upDistance)
-		moveStraight('forward', -forwardDistance)
+		if isReturnWhenError then
+			moveStraight('right', -resultDistance)
+			moveStraight('up', -upDistance)
+			moveStraight('forward', -forwardDistance)
+		end
 		return false
 	end
 
