@@ -4,23 +4,30 @@ local selectedItemDetail = turtle.getItemDetail(turtle.getSelectedSlot())
 assert(selectedItemDetail, 'block for fill is not selected')
 local blockForFill = selectedItemDetail.name
 
-print('Enter up or down')
-local upOrDown = read()
-print('Enter height')
-local height = tonumber(read())
-print('Enter right or left')
-local rightOrLeft = read()
-print('Enter width')
-local width = tonumber(read())
-print()
+local upOrDown, height, rightOrLeft, width = ...
 
-print(upOrDown, ' ', height, ' , ', rightOrLeft, ' ', width)
-print('block for fill : ', blockForFill)
-print('OK? (y|n)')
-local okInput = read()
-
-if okInput ~= 'y' then
-	return
+if upOrDown == nil then
+	print('Enter up or down')
+	local upOrDown = read()
+	print('Enter height')
+	local height = tonumber(read())
+	print('Enter right or left')
+	local rightOrLeft = read()
+	print('Enter width')
+	local width = tonumber(read())
+	print()
+	
+	print(upOrDown, ' ', height, ' , ', rightOrLeft, ' ', width)
+	print('block for fill : ', blockForFill)
+	print('OK? (y|n)')
+	local okInput = read()
+	
+	if okInput ~= 'y' then
+		return
+	end
+else
+	height = tonumber(height)
+	width = tonumber(width)
 end
 
 local currUpPosition = 0
