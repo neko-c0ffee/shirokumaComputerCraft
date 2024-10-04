@@ -1,5 +1,9 @@
 dofile(shell.resolveProgram('funcMove'))
 
+local selectedItemDetail = turtle.getItemDetail(turtle.getSelectedSlot())
+assert(selectedItemDetail, 'block for fill is not selected')
+local blockForFill = selectedItemDetail.name
+
 print('Enter up or down')
 local upOrDown = read()
 print('Enter height')
@@ -11,6 +15,7 @@ local width = tonumber(read())
 print()
 
 print(upOrDown, ' ', height, ' , ', rightOrLeft, ' ', width)
+print('block for fill : ', blockForFill)
 print('OK? (y|n)')
 local okInput = read()
 
@@ -20,6 +25,25 @@ end
 
 local currUpPosition = 0
 local currRightPosition = 0
+
+local function placeBlock() 
+	if turtle.getItemCount(turtle.getSelectedSlot()) <= 0 then
+		local isExists = false
+		for i = 1, 16, 1 do
+			local itemDetail = turtle.getItemDetail(i)
+			if itemDetail ~= nil and itemDetail.name == blockForFill then
+				turtle.select(i)
+				isExists = true
+			end
+		end
+		if not isExists then
+			print('block for fill is not exists')
+			return false
+		end
+	end
+	turtle.place()
+	return true
+end
 
 local function isEnoughFuel()
 	-- 10 is buffer
@@ -35,7 +59,10 @@ local function fillLine(lineWidth)
 		return false
 	end
 
-	turtle.place()
+	local isPlaceSuccess = placeBlock()
+	if not isPlaceSuccess then
+		return false
+	end
 
 	local absDistance = math.abs(lineWidth) - 1;
 	if absDistance == 0 then
@@ -49,7 +76,10 @@ local function fillLine(lineWidth)
 			return false
 		end
 		currRightPosition = currRightPosition + moveDirection
-		turtle.place()
+		isPlaceSuccess = placeBlock()
+		if not isPlaceSuccess then
+			return false
+		end
 
 		if not isEnoughFuel() then
 			return false
@@ -86,3 +116,5 @@ print('fill wall is ', isSuccess and 'succeed' or 'failed')
 
 local isReturnSuccess = move(0, -currUpPosition, -currRightPosition)
 print('return to initial position is ', isReturnSuccess and 'succeed' or 'failed')
+
+turtle.select(1)
