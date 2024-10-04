@@ -79,7 +79,7 @@ local function fillLine(lineWidth)
 
 	local moveDirection = lineWidth > 0 and 1 or -1
 	for i = 1, absDistance, 1 do
-		local isMoveSuccess = move(0, 0, moveDirection)
+		local isMoveSuccess = move(0, 0, moveDirection, false)
 		if not isMoveSuccess then
 			return false
 		end
@@ -107,7 +107,7 @@ for i = 1, height, 1 do
 
 	if i ~= height then
 		local moveDirection = upOrDown == 'up' and 1 or -1
-		isSuccess = move(0, moveDirection, 0)
+		isSuccess = move(0, moveDirection, 0, false)
 		if not isSuccess then
 			break
 		end
@@ -122,7 +122,7 @@ end
 
 print('fill wall is ', isSuccess and 'succeed' or 'failed')
 
-local isReturnSuccess = move(0, -currUpPosition, -currRightPosition)
+local isReturnSuccess = move(0, -currUpPosition, -currRightPosition, false)
 print('return to initial position is ', isReturnSuccess and 'succeed' or 'failed')
 
 turtle.select(1)
