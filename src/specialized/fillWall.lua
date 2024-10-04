@@ -8,13 +8,13 @@ local upOrDown, height, rightOrLeft, width = ...
 
 if upOrDown == nil then
 	print('Enter up or down')
-	local upOrDown = read()
+	upOrDown = read()
 	print('Enter height')
-	local height = tonumber(read())
+	height = tonumber(read())
 	print('Enter right or left')
-	local rightOrLeft = read()
+	rightOrLeft = read()
 	print('Enter width')
-	local width = tonumber(read())
+	width = tonumber(read())
 	print()
 	
 	print(upOrDown, ' ', height, ' , ', rightOrLeft, ' ', width)
