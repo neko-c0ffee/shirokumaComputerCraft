@@ -16,12 +16,12 @@ if upOrDown == nil then
 	print('Enter width')
 	width = tonumber(read())
 	print()
-	
+
 	print(upOrDown, ' ', height, ' , ', rightOrLeft, ' ', width)
 	print('block for fill : ', blockForFill)
 	print('OK? (y|n)')
 	local okInput = read()
-	
+
 	if okInput ~= 'y' then
 		return
 	end
@@ -33,7 +33,7 @@ end
 local currUpPosition = 0
 local currRightPosition = 0
 
-local function placeBlock() 
+local function placeBlock()
 	if turtle.getItemCount(turtle.getSelectedSlot()) <= 0 then
 		local isExists = false
 		for i = 1, 16, 1 do
@@ -120,7 +120,7 @@ for i = 1, height, 1 do
 	end
 end
 
-print('fill wall is ', isSuccess and 'succeed' or 'failed')
+print('fill wall ', isSuccess and 'succeed' or 'failed')
 
 local isReturnSuccess = move(0, -currUpPosition, -currRightPosition, false)
 print('return to initial position is ', isReturnSuccess and 'succeed' or 'failed')
