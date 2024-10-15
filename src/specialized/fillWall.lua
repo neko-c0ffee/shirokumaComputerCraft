@@ -79,11 +79,11 @@ local function fillLine(lineWidth)
 
 	local moveDirection = lineWidth > 0 and 1 or -1
 	for i = 1, absDistance, 1 do
-		local isMoveSuccess = move(0, 0, moveDirection, false)
+		local isMoveSuccess = move(0, moveDirection, 0, false)
 		if not isMoveSuccess then
 			return false
 		end
-		currRightPosition = currRightPosition + moveDirection
+		currUpPosition = currUpPosition + moveDirection
 		isPlaceSuccess = placeBlock()
 		if not isPlaceSuccess then
 			return false
@@ -96,22 +96,22 @@ local function fillLine(lineWidth)
 	return true
 end
 
-local isRight = rightOrLeft == 'right'
+local isUp = upOrDown == 'up'
 local isSuccess = true
-for i = 1, height, 1 do
-	isSuccess = fillLine(isRight and width or -width)
-	isRight = not isRight
+for i = 1, width, 1 do
+	isSuccess = fillLine(isUp and height or -height)
+	isUp = not isUp
 	if not isSuccess then
 		break
 	end
 
-	if i ~= height then
-		local moveDirection = upOrDown == 'up' and 1 or -1
-		isSuccess = move(0, moveDirection, 0, false)
+	if i ~= width then
+		local moveDirection = rightOrLeft == 'right' and 1 or -1
+		isSuccess = move(0, 0, moveDirection, false)
 		if not isSuccess then
 			break
 		end
-		currUpPosition = currUpPosition + moveDirection
+		currRightPosition = currRightPosition + moveDirection
 
 		if not isEnoughFuel() then
 			isSuccess = false
